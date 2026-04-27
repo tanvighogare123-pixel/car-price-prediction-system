@@ -1,12 +1,39 @@
-import streamlit as st
+import pandas as pd
+import pickle
+from flask import Flask, render_template, request
 
-st.title("Car Price Prediction 🚗")
+app = Flask(__name__)
 
-st.write("Welcome to my project")
+# Load model
+model = pickle.load(open("model.pkl", "rb"))
 
-year = st.number_input("Enter car year", 2000, 2025)
-price = st.number_input("Enter present price")
-kms = st.number_input("Enter kms driven")
+@app.route("/")
+def home():
+    return render_template("index.html")
 
-if st.button("Predict"):
-    st.success("Prediction coming soon 🚀")
+@app.route("/predict", methods=["POST"])
+def predict():
+    try:
+        year = int(request.form["year"])
+        present_price = float(request.form["present_price"])
+        kms_driven = int(request.form["kms_driven"])
+        fuel_type = int(request.form["fuel_type"])
+        seller_type = int(request.form["seller_type"])
+        transmission = int(request.form["transmission"])
+        owner = int(request.form["owner"])
+
+        prediction = model.predict([[year, present_price, kms_driven,
+                                     fuel_type, seller_type,
+                                     transmission, owner]])
+
+        output = round(prediction[0], 2)
+
+        return render_template("index.html",
+                               prediction_text=f"Predicted Price: ₹ {output} Lakhs")
+
+    except:
+        return render_template("index.html",
+                               prediction_text="Error in input!")
+
+if __name__ == "__main__":
+    app.run(debug=True)
