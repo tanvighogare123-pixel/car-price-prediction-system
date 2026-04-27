@@ -1,5 +1,0 @@
-
-pandas
-scikit-lea
-numpy
-streamlit
