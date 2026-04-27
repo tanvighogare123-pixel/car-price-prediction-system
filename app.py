@@ -1,14 +1,12 @@
 import streamlit as st
-import pandas as pd
-import numpy as np
 
 st.title("Car Price Prediction 🚗")
 
-st.write("Enter car details:")
+st.write("Welcome to my project")
 
-year = st.number_input("Year", 2000, 2025)
-present_price = st.number_input("Present Price")
-kms_driven = st.number_input("Kms Driven")
+year = st.number_input("Enter car year", 2000, 2025)
+price = st.number_input("Enter present price")
+kms = st.number_input("Enter kms driven")
 
 if st.button("Predict"):
-    st.success("Prediction feature coming soon 🚀")
+    st.success("Prediction coming soon 🚀")
