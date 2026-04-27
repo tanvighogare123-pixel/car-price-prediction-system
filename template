@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Car Price Predictor</title>
+</head>
+<body>
+
+<h2>Car Price Prediction</h2>
+
+<form action="/predict" method="post">
+    Year: <input type="number" name="year"><br><br>
+    Present Price: <input type="text" name="present_price"><br><br>
+    Kms Driven: <input type="number" name="kms_driven"><br><br>
+
+    Fuel Type:
+    <select name="fuel_type">
+        <option value="0">Petrol</option>
+        <option value="1">Diesel</option>
+    </select><br><br>
+
+    Seller Type:
+    <select name="seller_type">
+        <option value="0">Dealer</option>
+        <option value="1">Individual</option>
+    </select><br><br>
+
+    Transmission:
+    <select name="transmission">
+        <option value="0">Manual</option>
+        <option value="1">Automatic</option>
+    </select><br><br>
+
+    Owner: <input type="number" name="owner"><br><br>
+
+    <button type="submit">Predict</button>
+</form>
+
+<h3>{{ prediction_text }}</h3>
+
+</body>
+</html>
